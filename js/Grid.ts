@@ -9,9 +9,9 @@ export class Grid {
   private readonly verticalRooms = 3;
   private readonly CHANCE_OF_MISSING_ROOM = 0.08;
   private readonly minimumNumberOfRooms = 6;
-  private readonly minRoomWidth = 2;
+  private readonly minRoomWidth = 4;
   private readonly maxRoomWidth = Math.floor(this.columns / this.horizontalRooms) - 2;
-  private readonly minRoomHeight = 2;
+  private readonly minRoomHeight = 4;
   private readonly maxRoomHeight = Math.floor(this.rows / this.verticalRooms) - 2;
 
   cells: Array<Array<number>> = [];
@@ -50,7 +50,11 @@ export class Grid {
     this.setRoomPosition(room, roomGridX, roomGridY);
     for(let x=0; x<room.width; x++) {
       for(let y=0; y<room.height; y++) {
-        this.cells[x + room.x][y + room.y] = 1;
+        if(x === 0 || y === 0 || x === room.width - 1 || y === room.height - 1) {
+          this.cells[x + room.x][y + room.y] = 2;
+        } else {
+          this.cells[x + room.x][y + room.y] = 1;
+        }
       }
     }
     return room;
@@ -81,7 +85,7 @@ export class Grid {
   }
 }
 
-const cellColors = ['black', 'lightgrey']
+const cellColors = ['black', 'lightgrey', 'orange']
 
 interface Room {
   x: number,
