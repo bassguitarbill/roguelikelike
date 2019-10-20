@@ -19,6 +19,7 @@ export class Grid {
 
   constructor() {
     this.generateMap();
+    (window as any).generateMap = this.generateMap.bind(this);
   }
 
   generateMap() {

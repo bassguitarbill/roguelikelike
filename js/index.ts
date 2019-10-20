@@ -15,4 +15,6 @@ onLoad();
 
 function tick(timestamp : number) {
   game.tick(timestamp);
+
+  window.requestAnimationFrame(tick);
 }
