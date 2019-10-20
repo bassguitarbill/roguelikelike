@@ -1,9 +1,9 @@
 export class Grid {
 
-  readonly rows = 15;
-  readonly columns = 20;
-  private readonly rowHeight = 32;
-  private readonly columnWidth = 32;
+  readonly rows = 50;
+  readonly columns = 80;
+  private readonly rowHeight = 8;
+  private readonly columnWidth = 8;
 
   cells : Array<Array<number>> = [];
 
@@ -12,23 +12,17 @@ export class Grid {
   }
 
   generateMap() {
-    this.cells = [
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      [0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0],
-      [0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0],
-      [0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,0,0],
-      [0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,0,0],
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    ];
+    this.forEachCell(() => Math.floor(Math.random() * 2));
+  }
+
+  forEachCell(callback : Function) {
+    for(let x=0; x<this.columns; x++) {
+      if(!this.cells[x]) this.cells.push([]);
+      for(let y=0; y<this.rows; y++) {
+        if(!this.cells[x][y]) this.cells[x].push([]);
+        this.cells[x][y] = callback(x,y);
+      }
+    }
   }
 
   draw(ctx : CanvasRenderingContext2D) {
@@ -42,7 +36,7 @@ export class Grid {
   }
 
   getCellAt(x: number, y: number) {
-    return this.cells[y][x];
+    return this.cells[x][y];
   }
 }
 
