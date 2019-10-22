@@ -1,8 +1,8 @@
 export class Grid {
 
-  readonly rows = 50;
+  readonly rows = 25;
   readonly columns = 80;
-  private readonly rowHeight = 8;
+  private readonly rowHeight = 16;
   private readonly columnWidth = 8;
 
   private readonly horizontalRooms = 3;
